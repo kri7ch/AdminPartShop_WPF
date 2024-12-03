@@ -1,0 +1,127 @@
+﻿<Page x:Class="AdminPartShop.Pages.Regist"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdminPartShop"
+      mc:Ignorable="d" 
+      d:DesignHeight="827" d:DesignWidth="1253"
+      Title="Regist" Width="1253" Height="827">
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Width="1253" Height="827" VerticalAlignment="Center" Fill="#FFF1F1F1" RadiusX="60" RadiusY="60">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="50" Opacity="15" Direction="360"></DropShadowEffect>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="22" Margin="525,710,0,0" Height="36" Width="210" FontFamily="Bahnschrift Light">
+            <Hyperlink Click="Hyperlink_Click" TextDecorations="None" Foreground="#FF696969">
+                <Run Text="Есть аккаунт? Войти"/>
+            </Hyperlink>
+        </TextBlock>
+
+        <Label Content="Регистрация" HorizontalAlignment="Left" Margin="484,62,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="48" FontFamily="Bahnschrift Light" FontWeight="Bold"/>
+
+        <Label Content="Почта" HorizontalAlignment="Left" Margin="179,188,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <TextBox Style="{StaticResource tb_style}" CommandManager.PreviewExecuted="textBox_PreviewExecuted" PreviewKeyDown="textBox_PreviewKeyDown" 
+                 PreviewTextInput="textbox_email_PreviewTextInput" x:Name="textbox_email" MaxLength="50" HorizontalAlignment="Left" Margin="179,217,0,0"
+                 Padding="2, 12, 0, 0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="381" Background="{x:Null}" Foreground="Black" 
+                 BorderBrush="Black" FontSize="18" Height="46" SelectionBrush="#FFA5A5A5" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Введите адрес электронной почты. Пример rakhmaevdanil@gmail.ru
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="181,320,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <PasswordBox x:Name="textbox_password" Style="{StaticResource pb_style}" MaxLength="30" HorizontalAlignment="Left" Margin="181,349,0,0" VerticalAlignment="Top" Width="379"
+                     Height="46" BorderBrush="Black" Background="Transparent"
+                     FontSize="18" Padding="2,12,0,0" Foreground="Black" SelectionBrush="#FFA5A5A5" BorderThickness="0" PreviewKeyDown="textbox_password_PreviewKeyDown" FontFamily="Bahnschrift Light">
+            <PasswordBox.ToolTip>
+                <ToolTip>
+                    Минимум одна заглавная буква, одна маленькая буква, одну цифру и быть не менее 6 символов.
+                </ToolTip>
+            </PasswordBox.ToolTip>
+        </PasswordBox>
+
+        <Button Style="{StaticResource btn_style}"  Content="Зарегистрироваться" x:Name="btn_enter" HorizontalAlignment="Center" Margin="0,631,0,0" Cursor="Hand"
+                VerticalAlignment="Top" Height="74" Width="320" BorderBrush="Black" Background="White" FontSize="22" FontWeight="Medium" Click="btn_enter_Click">
+        </Button>
+
+        <Label Content="Повторите пароль" HorizontalAlignment="Left" Margin="180,445,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <PasswordBox x:Name="textbox_password_2" Style="{StaticResource pb_style}" MaxLength="30" HorizontalAlignment="Left" Margin="184,479,0,0" VerticalAlignment="Top" Width="376" Height="46"
+                     BorderBrush="black" Background="Transparent" FontSize="18" Padding="2,12,0,0" 
+                     Foreground="Black" SelectionBrush="#FFA5A5A5" BorderThickness="0" PreviewKeyDown="textbox_password_PreviewKeyDown" FontFamily="Bahnschrift Light">
+            <PasswordBox.ToolTip>
+                <ToolTip>
+                    Повторите пароль.
+                </ToolTip>
+            </PasswordBox.ToolTip>
+        </PasswordBox>
+
+        <Label Content="Отчество" HorizontalAlignment="Left" Margin="676,441,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <TextBox Style="{StaticResource tb_style}" MaxLength="30" CommandManager.PreviewExecuted="textBox_PreviewExecuted" PreviewKeyDown="textBox_PreviewKeyDown"
+                 PreviewTextInput="textbox_Correct_input_PreviewTextInput" x:Name="textbox_middle_name" HorizontalAlignment="Left" Margin="680,475,0,0" Padding="2, 12, 0, 0"
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="406" Background="{x:Null}" Foreground="Black" BorderBrush="Black" FontSize="18" Height="46"
+                 SelectionBrush="#FFA5A5A5" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Ввод начинаем вводить с большой буквы!
+            Если нет отчества, оставить пустым
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Content="Имя" HorizontalAlignment="Left" Margin="676,309,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <TextBox Style="{StaticResource tb_style}" MaxLength="30" CommandManager.PreviewExecuted="textBox_PreviewExecuted" PreviewKeyDown="textBox_PreviewKeyDown"
+                 PreviewTextInput="textbox_Correct_input_PreviewTextInput" x:Name="textbox_name" HorizontalAlignment="Left" Margin="680,347,0,0" Padding="2, 12, 0, 0"
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="406" Background="{x:Null}" Foreground="Black" BorderBrush="Black" FontSize="18" Height="46"
+                 SelectionBrush="#FFA5A5A5" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Ввод начинать вводить с большой буквы!
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="676,183,0,0" VerticalAlignment="Top" Foreground="#FF696969" FontSize="18" FontFamily="Bahnschrift Light"/>
+        <TextBox Style="{StaticResource tb_style}"  CommandManager.PreviewExecuted="textBox_PreviewExecuted" PreviewKeyDown="textBox_PreviewKeyDown"
+                 PreviewTextInput="textbox_Correct_input_PreviewTextInput" x:Name="textbox_surname" HorizontalAlignment="Left" Margin="680,217,0,0" Padding="2, 12, 0, 0"
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="406" Background="{x:Null}" Foreground="Black" BorderBrush="Black" FontSize="18" Height="46"
+                 SelectionBrush="#FFA5A5A5" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Ввод начинать вводить с большой буквы!
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <CheckBox x:Name="checkbox_password" Content="Показать пароль" HorizontalAlignment="Left" Margin="415,400,0,0" VerticalAlignment="Top" Foreground="#FF696969"
+                  Checked="checkbox_password_Checked" Unchecked="checkbox_password_Unchecked" FontFamily="Bahnschrift Light" FontSize="16"/>
+
+        <CheckBox x:Name="checkbox_password_2" Content="Показать пароль" HorizontalAlignment="Left" Margin="415,530,0,0" VerticalAlignment="Top" Foreground="#FF696969"
+                  Checked="checkbox_password_Checked_2" Unchecked="checkbox_password_Unchecked_2" FontFamily="Bahnschrift Light" FontSize="16"/>
+
+        <TextBox Style="{StaticResource tb_style}" Padding="2, 12, 0, 0" HorizontalAlignment="Left" MaxLength="25"
+                 x:Name="textbox_show_password" BorderThickness="2,2,2,2" Height="46" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="379" FontSize="18" Margin="181,349,0,0"
+                 PreviewKeyDown="textBox_PreviewKeyDown" SelectionBrush="#FFA5A5A5" Foreground="Black" Background="{x:Null}" BorderBrush="Black" Visibility="Hidden" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Минимум одна заглавная буква, одна маленькая буква, одну цифру и быть не менее 6 символов.
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <TextBox Style="{StaticResource tb_style}" Padding="2, 12, 0, 0" HorizontalAlignment="Left" MaxLength="25"
+                 x:Name="textbox_show_password_2" BorderThickness="2,2,2,2" Height="46" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="376" FontSize="18" Margin="184,479,0,0"
+                 PreviewKeyDown="textBox_PreviewKeyDown" SelectionBrush="#FFA5A5A5" Foreground="Black" Background="{x:Null}" BorderBrush="Black" Visibility="Hidden" FontFamily="Bahnschrift Light">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Минимум одна заглавная буква, одна маленькая буква, одну цифру и быть не менее 6 символов.
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+
+    </Grid>
+</Page>

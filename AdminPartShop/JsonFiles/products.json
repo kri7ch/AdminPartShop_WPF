@@ -1,0 +1,20 @@
+[
+  {
+    "Name_Product": "Наушники",
+    "Price": "100",
+    "Count_Product": 10,
+    "Description": "Описание товара 1",
+    "ImagePath": "C:\\Users\\rakhm\\OneDrive\\Рабочий стол\\Фото товаров\\headphones.png",
+    "CategoryID": 2,
+    "Rating": 1
+  },
+  {
+    "Name_Product": "Мышка",
+    "Price": "200",
+    "Count_Product": 15,
+    "Description": "Описание товара 2",
+    "ImagePath": "C:\\Users\\rakhm\\OneDrive\\Рабочий стол\\Фото товаров\\mouse.png",
+    "CategoryID": 1,
+    "Rating": 2
+  }
+]

@@ -38,7 +38,7 @@ namespace UserAPI.Controllers
             if (userCheck != null)
             {
                 return BadRequest("Пользователь с такой почтой уже существует!");
-            }
+            }   
 
             int maxId = users.Count > 0 ? users.Max(u => u.Id) : 0;
             user.Id = maxId + 1;

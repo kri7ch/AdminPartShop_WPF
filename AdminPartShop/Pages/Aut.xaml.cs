@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using EasyCaptcha.Wpf;
 using AdminPartShop.Models;
 using AdminPartShop.Windows;
+using System.Net.Http;
 
 namespace AdminPartShop.Pages
 {
@@ -158,13 +159,13 @@ namespace AdminPartShop.Pages
             return emptyFields;
         }
 
-        private void Checking_the_data()
+        private async void Checking_the_data()
         {
             LoadUsers();
 
             string email = textbox_email.Text;
-            string password = textbox_password.Password;
-            string prominent_password = textbox_show_password.Text;
+
+            string passwordToSend = checkbox_password.IsChecked == true ? textbox_show_password.Text : textbox_password.Password;
 
             if (checkingEmptyFields() || formatVerification())
             {
@@ -182,37 +183,43 @@ namespace AdminPartShop.Pages
             if (user.LockoutEnd.HasValue && user.LockoutEnd > DateTime.Now)
             {
                 TimeSpan remainingTime = user.LockoutEnd.Value - DateTime.Now;
-                string message = $"Ваш аккаунт заблокирован. Осталось {remainingTime.Hours} часов(ы) и {remainingTime.Minutes} минут(ы) и {remainingTime.Seconds} секунд(ы) до разблокировки.";
+                string message = $"Ваш аккаунт заблокирован. Осталось {remainingTime.Hours} часов(ы) и {remainingTime.Minutes} минут(ы) до разблокировки.";
                 MessageBox.Show(message, "Блокировка аккаунта", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (checkbox_password.IsChecked == true)
-            {
-                if (user.Password == prominent_password)
-                {
-                    SuccessfulLogin(user);
-                    return;
-                }
-                numberAttempts(email);
-            }
-            else if (checkbox_password.IsChecked == false)
-            {
-                if (user.Password == password)
-                {
-                    SuccessfulLogin(user);
-                    return;
-                }
-                numberAttempts(email);
-            }
-            else
-            {
-                MessageBox.Show("Неверный логин или пароль!", "Предупреждение: неверные данные", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            HttpClient client = new HttpClient();
+            string url = "http://localhost:5140/api/User/Authorization";
 
-            MessageBox.Show("Неверный логин или пароль!", "Предупреждение: неверные данные", MessageBoxButton.OK, MessageBoxImage.Error);
+            var oldUser = new User
+            {
+                Email = email,
+                Password = passwordToSend
+            };
+
+            var json = JsonConvert.SerializeObject(oldUser);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var userJson = await response.Content.ReadAsStringAsync();
+                    User new_user = JsonConvert.DeserializeObject<User>(userJson);
+                    SuccessfulLogin(new_user);
+                }
+                else
+                {
+                    MessageBox.Show("Неверные данные для входа!", "Предупреждение: неверные данные", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"HTTP Request Error: {ex.Message}");
+            }
         }
+
 
         private void SuccessfulLogin(User user)
         {

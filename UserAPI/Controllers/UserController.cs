@@ -3,6 +3,7 @@ using AdminPartShop.Models;
 using System.Text.RegularExpressions;
 using System.Diagnostics.Tracing;
 using System.Windows;
+using Newtonsoft.Json;
 
 namespace UserAPI.Controllers
 {
@@ -27,6 +28,22 @@ namespace UserAPI.Controllers
                 return NotFound("Пользователи не найдены.");
             }
             return Ok(user_all);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteUser(int id)
+        {
+            List<User> users = JsonUser.GetUsers() ?? new List<User>();
+            var user_id = users.FirstOrDefault(u => u.Id == id);
+
+            if (user_id == null)
+            {
+                return NotFound("Пользователь не найден.");
+            }
+
+            users.Remove(user_id);
+            JsonUser.SaveUsers(users);
+            return CreatedAtAction(nameof(Register), "Ваш профиль удален");
         }
 
         [HttpPost("Register")]
@@ -56,6 +73,34 @@ namespace UserAPI.Controllers
             var user_check = users.FirstOrDefault(u => u.Email == loginModel.Email && u.Password == loginModel.Password);
 
             return user_check == null ? NotFound("Пользователь не найден.") : Ok(user_check);
+        }
+
+        [HttpPut("ChangingUserData")]
+        public ActionResult<User> ChangingUserData([FromBody] EditingDataUser editdata)
+        {
+            var users = JsonUser.GetUsers();
+
+            var currentUser = users.FirstOrDefault(u => u.Id == editdata.ID);
+
+            if (currentUser == null)
+            {
+                return NotFound("Пользователь не найден.");
+            }
+
+            if (string.IsNullOrWhiteSpace(editdata.Surname) ||
+                string.IsNullOrWhiteSpace(editdata.Name) ||
+                string.IsNullOrWhiteSpace(editdata.MiddleName))
+            {
+                return BadRequest("Все поля должны быть заполнены.");
+            }
+
+            currentUser.Surname = editdata.Surname;
+            currentUser.Name = editdata.Name;
+            currentUser.Middle_Name = editdata.MiddleName;
+
+            JsonUser.SaveUsers(users);
+
+            return Ok(currentUser);
         }
     }
 }

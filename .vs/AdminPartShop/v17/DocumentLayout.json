@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\pages\\aut.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\pages\\aut.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\jsonfiles\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\jsonfiles\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\pages\\profile_page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\pages\\profile_page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\pages\\aut.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\pages\\aut.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\pages\\aut.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\pages\\aut.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\jsonfiles\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\jsonfiles\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\pages\\profile_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\pages\\profile_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\models\\editingdatauser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\models\\editingdatauser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A785DFD4-C8D6-4052-9CCB-2C5BA5748538}|UserAPI\\UserAPI.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\userapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A785DFD4-C8D6-4052-9CCB-2C5BA5748538}|UserAPI\\UserAPI.csproj|solutionrelative:userapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|solutionrelative:adminpartshop\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31475071-EFF4-449C-96CA-DAD6CB2E89E7}|AdminPartShop\\AdminPartShop.csproj|c:\\users\\rakhm\\source\\repos\\adminpartshop\\adminpartshop\\models\\jsonuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,17 +50,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "users.json",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\users.json",
               "RelativeDocumentMoniker": "AdminPartShop\\JsonFiles\\users.json",
               "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\users.json",
               "RelativeToolTip": "AdminPartShop\\JsonFiles\\users.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-12-03T17:52:13.848Z",
               "IsPinned": true,
@@ -56,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "products.json",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\products.json",
               "RelativeDocumentMoniker": "AdminPartShop\\JsonFiles\\products.json",
@@ -69,7 +81,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "JsonUser.cs",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Models\\JsonUser.cs",
               "RelativeDocumentMoniker": "AdminPartShop\\Models\\JsonUser.cs",
@@ -78,12 +90,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T09:41:05.821Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Models\\User.cs",
               "RelativeDocumentMoniker": "AdminPartShop\\Models\\User.cs",
@@ -92,7 +103,31 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T10:44:15.379Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EditingDataUser.cs",
+              "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Models\\EditingDataUser.cs",
+              "RelativeDocumentMoniker": "AdminPartShop\\Models\\EditingDataUser.cs",
+              "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Models\\EditingDataUser.cs",
+              "RelativeToolTip": "AdminPartShop\\Models\\EditingDataUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T11:36:52.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Profile_Page.xaml",
+              "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Profile_Page.xaml",
+              "RelativeDocumentMoniker": "AdminPartShop\\Pages\\Profile_Page.xaml",
+              "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Profile_Page.xaml",
+              "RelativeToolTip": "AdminPartShop\\Pages\\Profile_Page.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-05T11:29:16.895Z",
               "EditorCaption": ""
             },
             {
@@ -109,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Aut.xaml",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Aut.xaml",
               "RelativeDocumentMoniker": "AdminPartShop\\Pages\\Aut.xaml",
@@ -121,26 +156,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Aut.xaml.cs",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Aut.xaml.cs",
               "RelativeDocumentMoniker": "AdminPartShop\\Pages\\Aut.xaml.cs",
               "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Aut.xaml.cs",
               "RelativeToolTip": "AdminPartShop\\Pages\\Aut.xaml.cs",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAgwKwAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAALwAAAAAAAAAAAAowMUAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-05T11:02:49.727Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "Profile_Page.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Profile_Page.xaml.cs",
+              "RelativeDocumentMoniker": "AdminPartShop\\Pages\\Profile_Page.xaml.cs",
+              "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\Pages\\Profile_Page.xaml.cs",
+              "RelativeToolTip": "AdminPartShop\\Pages\\Profile_Page.xaml.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAgwKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T11:29:19.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\UserAPI\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "UserAPI\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\UserAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "UserAPI\\Controllers\\UserController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAqwDYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAgwFwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T09:38:43.478Z",
               "EditorCaption": ""

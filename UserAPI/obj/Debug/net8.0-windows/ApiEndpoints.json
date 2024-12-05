@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "UserAPI.Controllers.UserController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserAPI.Controllers.UserController",
     "Method": "Authorization",
     "RelativePath": "api/User/Authorization",
     "HttpMethod": "POST",
@@ -36,6 +52,32 @@
       {
         "Name": "loginModel",
         "Type": "AdminPartShop.Models.UserLoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AdminPartShop.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UserAPI.Controllers.UserController",
+    "Method": "ChangingUserData",
+    "RelativePath": "api/User/ChangingUserData",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "editdata",
+        "Type": "AdminPartShop.Models.EditingDataUser",
         "IsRequired": true
       }
     ],

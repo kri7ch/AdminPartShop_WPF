@@ -23,6 +23,7 @@ using EasyCaptcha.Wpf;
 using AdminPartShop.Models;
 using AdminPartShop.Windows;
 using AdminPartShop.Pages;
+using System.Net.Http;
 
 namespace AdminPartShop.Pages
 {
@@ -158,29 +159,57 @@ namespace AdminPartShop.Pages
 
             return isEmpty;
         }
-        private void EditingData()
-        {
-            List<User> users = JsonConvert.DeserializeObject<List<User>>(json);
-            User currentUser = users.FirstOrDefault(userInfo => userInfo.Id == currentUserId);
 
+        private async void EditingData()
+        {
 
             if (Checking_for_completion())
             {
                 return;
             }
 
-            currentUser.Surname = textbox_surname.Text;
-            currentUser.Name = textbox_name.Text;
-            currentUser.Middle_Name = textbox_lastname.Text;
-            text_surname.Content = currentUser.Surname;
-            text_name.Content = currentUser.Name;
-            text_lastname.Content = currentUser.Middle_Name;
+            var editData = new EditingDataUser
+            {
+                ID = currentUserId,
+                Surname = textbox_surname.Text,
+                Name = textbox_name.Text,
+                MiddleName = textbox_lastname.Text
+            };
 
-            string newJson = JsonConvert.SerializeObject(users);
-            File.WriteAllText(json, newJson);
-            UpdatingElementsAfterEditing();
-            MessageBox.Show("Данные были обновлены!", "Обновление данных", MessageBoxButton.OK, MessageBoxImage.Information);
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "http://localhost:5140/api/User/ChangingUserData";
+                var json = JsonConvert.SerializeObject(editData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    HttpResponseMessage response = await client.PutAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var updatedUserJson = await response.Content.ReadAsStringAsync();
+                        User updatedUser = JsonConvert.DeserializeObject<User>(updatedUserJson);
+
+                        text_surname.Content = updatedUser.Surname;
+                        text_name.Content = updatedUser.Name;
+                        text_lastname.Content = updatedUser.Middle_Name;
+
+                        UpdatingElementsAfterEditing();
+
+                        MessageBox.Show("Данные были успешно обновлены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при обновлении данных: " + response.ReasonPhrase, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                }
+            }
         }
+
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {

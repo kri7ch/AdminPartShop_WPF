@@ -25,5 +25,7 @@ namespace AdminPartShop.Models
             Email = email;
             Password = password;
         }
+
+        public User() { }
     }
 }

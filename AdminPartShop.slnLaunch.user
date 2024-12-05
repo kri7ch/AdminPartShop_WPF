@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Новый профиль",
+    "Projects": [
+      {
+        "Path": "AdminPartShop\\AdminPartShop.csproj",
+        "Action": "Start",
+        "DebugTarget": "AdminPartShop"
+      },
+      {
+        "Path": "UserAPI\\UserAPI.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  }
+]

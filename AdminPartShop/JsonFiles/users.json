@@ -78,5 +78,55 @@
     "Password": "QWeqweqw123",
     "LockoutEnd": "3023-11-01T14:09:26.3913667+05:00",
     "TwoFactor_Authentication": false
+  },
+  {
+    "Id": 9,
+    "Surname": "string",
+    "Name": "string",
+    "Middle_Name": "string",
+    "Email": "QWEqweq@qwe.qwe",
+    "Password": "QWeqweqeq151",
+    "LockoutEnd": "2024-12-04T10:45:06.502Z",
+    "TwoFactor_Authentication": true
+  },
+  {
+    "Id": 10,
+    "Surname": "Йцуйцуйцуцй",
+    "Name": "Уйцуйуйуцуйцуйу",
+    "Middle_Name": "Йуцйуйуйу",
+    "Email": "qweqweqw@qwe.qwe",
+    "Password": "Qwqeq123",
+    "LockoutEnd": null,
+    "TwoFactor_Authentication": false
+  },
+  {
+    "Id": 11,
+    "Surname": "Рахмаев",
+    "Name": "Данилус",
+    "Middle_Name": "Балтикус",
+    "Email": "qweqweqe@qwe.qwe",
+    "Password": "Qweqwe1234",
+    "LockoutEnd": null,
+    "TwoFactor_Authentication": false
+  },
+  {
+    "Id": 12,
+    "Surname": "string",
+    "Name": "string",
+    "Middle_Name": "string",
+    "Email": "string",
+    "Password": "string",
+    "LockoutEnd": "2024-12-04T13:47:10.561Z",
+    "TwoFactor_Authentication": false
+  },
+  {
+    "Id": 13,
+    "Surname": "Rakhmaev",
+    "Name": "Danil",
+    "Middle_Name": "Denisovich",
+    "Email": "rakhmdan@gmail.com",
+    "Password": "Danil123",
+    "LockoutEnd": null,
+    "TwoFactor_Authentication": false
   }
 ]

@@ -99,12 +99,13 @@ namespace AdminPartShop.Pages
         public async void SaveUser(User newUser)
         {
             HttpClient client = new HttpClient();
-            string url = "https://localhost:7192/api/User/Register";
+            
+            string url = "https://localhost:7244/api/User/Register";
 
             var json = JsonConvert.SerializeObject(newUser);
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
+            
             try
             {
                 HttpResponseMessage response = await client.PostAsync(url, content);
@@ -113,6 +114,10 @@ namespace AdminPartShop.Pages
                 {
                     Entry_window();
                     MessageBox.Show("Вы успешно зарегистрировались!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка валидации");
                 }
             }
             catch (HttpRequestException ex)

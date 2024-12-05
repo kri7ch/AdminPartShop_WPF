@@ -61,9 +61,7 @@ namespace AdminPartShop.Windows
 
         private void ShowNotification(string message)
         {
-            var notify1 = new ToastContentBuilder();
-            notify1.AddText(message);
-            notify1.Show();
+            MessageBox.Show(message);
         }
 
         private void sendingСode()

@@ -8,6 +8,7 @@ namespace AdminPartShop.Models
 {
     public class Products
     {
+        public int Id { get; set; }
         public string Name_Product { get; set; }
         public string Price { get; set; }
         public int Count_Product { get; set; }

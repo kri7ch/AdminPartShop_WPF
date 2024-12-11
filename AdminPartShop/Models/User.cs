@@ -12,6 +12,7 @@ namespace AdminPartShop.Models
         public string Surname { get; set; }
         public string Name { get; set; }
         public string Middle_Name { get; set; }
+        public string BirthDay { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime? LockoutEnd { get; set; }

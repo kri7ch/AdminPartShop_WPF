@@ -53,9 +53,10 @@ namespace UserAPI.Controllers
             var userCheck = users.FirstOrDefault(u => u.Email.ToLower() == user.Email.ToLower());
 
             if (userCheck != null)
+
             {
                 return BadRequest("Пользователь с такой почтой уже существует!");
-            }   
+            }
 
             int maxId = users.Count > 0 ? users.Max(u => u.Id) : 0;
             user.Id = maxId + 1;

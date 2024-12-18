@@ -5,18 +5,18 @@
     "Name": "Данил",
     "Middle_Name": "Денисович",
     "BirthDay": "0001-01-01",
-    "Email": "rakhm@gmail.com",
-    "Password": "Qwertyuio123",
+    "Email": "qwe@qwe.qwe",
+    "Password": "qwe123",
     "LockoutEnd": null,
     "TwoFactor_Authentication": false
   },
   {
     "Id": 2,
-    "Surname": "Рахмаев",
-    "Name": "Евгений",
+    "Surname": "Михайлов",
+    "Name": "Данил",
     "Middle_Name": "Юрьевич",
     "BirthDay": "0001-01-01",
-    "Email": "1",
+    "Email": "qwe@qwe.qwe",
     "Password": "1",
     "LockoutEnd": "2024-10-24T09:56:06.9356543+05:00",
     "TwoFactor_Authentication": false

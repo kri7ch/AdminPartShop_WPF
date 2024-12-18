@@ -20,7 +20,17 @@ namespace AdminPartShop.Models
             }
 
             var json = File.ReadAllText(FilePath);
-            return JsonConvert.DeserializeObject<List<Products>>(json);
+            var collection = JsonConvert.DeserializeObject<List<Products>>(json);
+
+            foreach (var product in collection)
+            {
+                var product2 = product as Products;
+                if (!File.Exists(product2.ImagePath))
+                {
+                    product2.ImagePath = "C:\\Users\\rakhm\\Downloads\\no-image.png";
+                }
+            }
+            return collection;
         }
 
         public static void SaveProductsToFile(List<Products> products)

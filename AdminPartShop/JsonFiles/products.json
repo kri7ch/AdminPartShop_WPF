@@ -3,20 +3,40 @@
     "Id": 1,
     "Name_Product": "Наушники",
     "Price": "100",
-    "Count_Product": 10,
+    "Count_Product": 14,
     "Description": "Описание товара 1",
-    "ImagePath": "C:\\Users\\rakhm\\OneDrive\\Рабочий стол\\Фото товаров\\headphones.png",
+    "ImagePath": "C:\\Users\\rakhm\\Downloads\\kisspng-computer-mouse-logitech-wireless-mouse-m165-optica-logitech-wireless-mouse-m165-91-4-end-932-1-5baabd2ae27191.9276921215379162029275.png",
     "CategoryID": 2,
     "Rating": 1
   },
   {
     "Id": 2,
-    "Name_Product": "Мышка",
+    "Name_Product": "Наушники",
     "Price": "200",
     "Count_Product": 15,
     "Description": "Описание товара 2",
-    "ImagePath": "C:\\Users\\rakhm\\OneDrive\\Рабочий стол\\Фото товаров\\mouse.png",
+    "ImagePath": "C:\\Users\\rakhm\\Downloads\\kisspng-computer-mouse-logitech-wireless-mouse-m165-optica-logitech-wireless-mouse-m165-91-4-end-932-1-5baabd2ae27191.9276921215379162029275.png",
     "CategoryID": 1,
     "Rating": 2
+  },
+  {
+    "Id": 3,
+    "Name_Product": "Наушники",
+    "Price": "200",
+    "Count_Product": 15,
+    "Description": "Описание товара 2",
+    "ImagePath": "",
+    "CategoryID": 1,
+    "Rating": 2
+  },
+  {
+    "Id": 4,
+    "Name_Product": "Мышка",
+    "Price": "299",
+    "Count_Product": 12,
+    "Description": "Крутая мышка",
+    "ImagePath": "C:\\Users\\rakhm\\Downloads\\kisspng-computer-mouse-logitech-wireless-mouse-m165-optica-logitech-wireless-mouse-m165-91-4-end-932-1-5baabd2ae27191.9276921215379162029275.png",
+    "CategoryID": 1,
+    "Rating": 0
   }
 ]

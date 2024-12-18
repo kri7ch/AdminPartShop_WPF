@@ -167,7 +167,7 @@ namespace AdminPartShop.Pages
 
             string passwordToSend = checkbox_password.IsChecked == true ? textbox_show_password.Text : textbox_password.Password;
 
-            if (checkingEmptyFields() || formatVerification())
+            if (checkingEmptyFields())
             {
                 return;
             }
@@ -219,7 +219,6 @@ namespace AdminPartShop.Pages
                 MessageBox.Show($"HTTP Request Error: {ex.Message}");
             }
         }
-
 
         private void SuccessfulLogin(User user)
         {

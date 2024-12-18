@@ -98,6 +98,7 @@ namespace UserAPI.Controllers
             currentUser.Surname = editdata.Surname;
             currentUser.Name = editdata.Name;
             currentUser.Middle_Name = editdata.MiddleName;
+            currentUser.Email = editdata.Email;
 
             JsonUser.SaveUsers(users);
 

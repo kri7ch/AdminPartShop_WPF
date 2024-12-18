@@ -17,6 +17,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using AdminPartShop.Models;
 using AdminPartShop.Windows;
+using System.Net.Http;
 
 namespace AdminPartShop.Pages
 {
@@ -35,48 +36,124 @@ namespace AdminPartShop.Pages
             categoryComboBox.SelectedIndex = 0;
             priceFilterComboBox.SelectedIndex = 0;
         }
-        private void LoadProducts()
+        private async void LoadProducts()
         {
-            list_view_products.Items.Clear();
-            string path = "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\products.json";
-            string json = File.ReadAllText(path);
-            allProducts = JsonConvert.DeserializeObject<List<Products>>(json);
+            string url = "http://localhost:5140/api/Product/All Products";
 
-            foreach (var product in allProducts)
+            using (HttpClient client = new HttpClient())
             {
-                var productControl = new Product_card();
-                productControl.SetProductData(product);
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
 
-                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
 
-                list_view_products.Items.Add(productControl);
+                        List<Products> products = JsonConvert.DeserializeObject<List<Products>>(jsonResponse);
+
+                        list_view_products.Items.Clear();
+
+                        foreach (var product in products)
+                        {
+                            var productControl = new Product_card();
+                            productControl.SetProductData(product);
+
+                            productControl.EditButtonClicked += ProductControl_EditButtonClicked;
+                            list_view_products.Items.Add(productControl);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при загрузке товаров: " + response.ReasonPhrase);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                }
             }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = searchTextBox.Text.ToLower();
-            list_view_products.Items.Clear();
-
-            var filteredProducts = allProducts.Where(p => p.Name_Product.ToLower().Contains(searchText)).ToList();
-
-            foreach (var product in filteredProducts)
+            if (!string.IsNullOrEmpty(searchText))
             {
-                var productControl = new Product_card();
-                productControl.SetProductData(product);
-
-                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
-
-                list_view_products.Items.Add(productControl);
-            }
-
-            if (list_view_products.Items.Count == 0)
-            {
+                SearchProducts(searchText);
                 tovar_ne_naiden.Visibility = Visibility.Visible;
             }
             else
             {
+                LoadProducts();
                 tovar_ne_naiden.Visibility = Visibility.Hidden;
+            }
+        }
+
+
+        private async void SearchProducts(string searchText)
+        {
+            string url = $"http://localhost:5140/api/Product/Search?query={searchText}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
+                        var filteredProducts = JsonConvert.DeserializeObject<List<Products>>(jsonResponse);
+                        UpdateProductList(filteredProducts);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при выполнении поиска: " + response.ReasonPhrase);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void UpdateProductList(List<Products> products)
+        {
+            list_view_products.Items.Clear();
+            foreach (var product in products)
+            {
+                var productControl = new Product_card();
+                productControl.SetProductData(product);
+                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
+                list_view_products.Items.Add(productControl);
+            }
+        }
+
+        private async void FilterProducts(int categoryId, string priceFilter)
+        {
+            string url = $"http://localhost:5140/api/Product/Filter?categoryId={categoryId}&priceFilter={priceFilter}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
+                        var filteredProducts = JsonConvert.DeserializeObject<List<Products>>(jsonResponse);
+                        UpdateProductList(filteredProducts);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при применении фильтров: " + response.ReasonPhrase);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                }
             }
         }
 
@@ -85,99 +162,29 @@ namespace AdminPartShop.Pages
             if (categoryComboBox.SelectedItem != null)
             {
                 var selectedCategory = (categoryComboBox.SelectedItem as ComboBoxItem)?.Tag.ToString();
-                FilterProductsByCategory(selectedCategory);
+                int categoryId = int.Parse(selectedCategory);
+
+                if (categoryId != 0)
+                {
+                    var selectedPriceFilter = priceFilterComboBox.SelectedItem != null ? (priceFilterComboBox.SelectedItem as ComboBoxItem)?.Tag.ToString(): null;
+                    FilterProducts(categoryId, selectedPriceFilter);
+                }
+                else
+                {
+                    LoadProducts();
+                }
             }
         }
 
-        private void FilterProductsByCategory(string categoryID)
-        {
-            list_view_products.Items.Clear();
-
-            var filteredProducts = allProducts;
-
-            if (categoryID != "0")
-            {
-                int categoryInt = int.Parse(categoryID);
-                filteredProducts = allProducts
-                    .Where(p => p.CategoryID == categoryInt)
-                    .ToList();
-            }
-
-            foreach (var product in filteredProducts)
-            {
-                var productControl = new Product_card();
-                productControl.SetProductData(product);
-
-                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
-
-                list_view_products.Items.Add(productControl);
-            }
-        }
         private void PriceFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (priceFilterComboBox.SelectedItem != null)
             {
                 var selectedPriceFilter = (priceFilterComboBox.SelectedItem as ComboBoxItem)?.Tag.ToString();
-                FilterProductsByPrice(selectedPriceFilter);
-            }
-        }
-
-        private void FilterProductsByPrice(string priceFilter)
-        {
-            list_view_products.Items.Clear();
-
-            var filteredProducts = allProducts;
-
-            if (categoryComboBox.SelectedItem != null)
-            {
                 var selectedCategory = (categoryComboBox.SelectedItem as ComboBoxItem)?.Tag.ToString();
-                if (selectedCategory != "0")
-                {
-                    int categoryInt = int.Parse(selectedCategory);
-                    filteredProducts = filteredProducts
-                        .Where(p => p.CategoryID == categoryInt)
-                        .ToList();
-                }
+                int categoryId = int.Parse(selectedCategory);
+                FilterProducts(categoryId, selectedPriceFilter);
             }
-
-            if (priceFilter != "0")
-            {
-                if (priceFilter == "1")
-                {
-                    filteredProducts = filteredProducts.OrderBy(p => ParsePrice(p.Price)).ToList();
-                }
-                else if (priceFilter == "2")
-                {
-                    filteredProducts = filteredProducts.OrderByDescending(p => ParsePrice(p.Price)).ToList();
-                }
-                else if (priceFilter == "3")
-                {
-                    filteredProducts = filteredProducts.Where(p => p.Rating >= 1 && p.Rating <= 5).OrderBy(p => p.Rating).ToList();
-                }
-                else if (priceFilter == "4")
-                {
-                    filteredProducts = filteredProducts.Where(p => p.Rating >= 1 && p.Rating <= 5).OrderByDescending(p => p.Rating).ToList();
-                }
-            }
-
-            foreach (var product in filteredProducts)
-            {
-                var productControl = new Product_card();
-                productControl.SetProductData(product);
-
-                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
-                list_view_products.Items.Add(productControl);
-            }
-        }
-
-        private decimal ParsePrice(string priceText)
-        {
-            var match = Regex.Match(priceText, @"\d+");
-            if (match.Success)
-            {
-                return decimal.Parse(match.Value);
-            }
-            return 0;
         }
 
         private void ProductControl_EditButtonClicked(object sender, RoutedEventArgs e)

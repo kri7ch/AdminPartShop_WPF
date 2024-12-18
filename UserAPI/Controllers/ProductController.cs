@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using AdminPartShop.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AdminPartShop.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace AdminPartShop.Controllers
 {
@@ -9,6 +8,19 @@ namespace AdminPartShop.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private static List<Products> products;
+
+        public ProductController()
+        {
+            products = ProductsJson.GetProductsFromFile();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Products>> GetProducts()
+        {
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Products> GetProduct(int id)
         {
@@ -22,8 +34,14 @@ namespace AdminPartShop.Controllers
         public ActionResult<IEnumerable<Products>> GetAllProducts()
         {
             var products = ProductsJson.GetProductsFromFile();
-            return products == null || !products.Any() ? NotFound("Продукты не найдены.") : Ok(products);
+
+            if (products == null)
+            {
+                return NotFound("Продукты не найдены.");
+            }
+            return Ok(products);
         }
+
 
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
@@ -56,7 +74,6 @@ namespace AdminPartShop.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
-
         [HttpPut("Update/{id}")]
         public ActionResult<Products> UpdateProduct(int id, Products updatedProduct)
         {
@@ -80,5 +97,56 @@ namespace AdminPartShop.Controllers
             return Ok(product);
         }
 
+        [HttpGet("Search")]
+        public ActionResult<IEnumerable<Products>> Search(string query)
+        {
+            var filteredProducts = products.Where(p => p.Name_Product.ToLower().Contains(query.ToLower())).ToList();
+            return Ok(filteredProducts);
+        }
+
+        [HttpGet("Filter")]
+        public ActionResult<IEnumerable<Products>> Filter(int? categoryId, string priceFilter)
+        {
+            IEnumerable<Products> filteredProducts = products;
+
+            if (categoryId.HasValue && categoryId.Value != 0)
+            {
+                filteredProducts = filteredProducts.Where(p => p.CategoryID == categoryId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(priceFilter))
+            {
+                switch (priceFilter)
+                {
+                    case "1":
+                        filteredProducts = filteredProducts.OrderBy(p => ParsePrice(p.Price));
+                        break;
+
+                    case "2":
+                        filteredProducts = filteredProducts.OrderByDescending(p => ParsePrice(p.Price));
+                        break;
+
+                    case "3":
+                        filteredProducts = filteredProducts.Where(p => p.Rating >= 1 && p.Rating <= 5).OrderBy(p => p.Rating);
+                        break;
+
+                    case "4":
+                        filteredProducts = filteredProducts.Where(p => p.Rating >= 1 && p.Rating <= 5).OrderByDescending(p => p.Rating);
+                        break;
+                }
+            }
+
+            return Ok(filteredProducts.ToList());
+        }
+
+        private decimal ParsePrice(string priceText)
+        {
+            var match = Regex.Match(priceText, @"\d+");
+            if (match.Success)
+            {
+                return decimal.Parse(match.Value);
+            }
+            return 0;
+        }
     }
 }

@@ -641,6 +641,10 @@
             "type": "string",
             "nullable": true
           },
+          "imageBase64": {
+            "type": "string",
+            "nullable": true
+          },
           "categoryID": {
             "type": "integer",
             "format": "int32"

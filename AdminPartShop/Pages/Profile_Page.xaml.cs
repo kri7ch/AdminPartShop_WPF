@@ -162,7 +162,6 @@ namespace AdminPartShop.Pages
 
         private async void EditingData()
         {
-
             if (Checking_for_completion())
             {
                 return;
@@ -171,6 +170,7 @@ namespace AdminPartShop.Pages
             var editData = new EditingDataUser
             {
                 ID = currentUserId,
+                Email = text_email.Content.ToString(),
                 Surname = textbox_surname.Text,
                 Name = textbox_name.Text,
                 MiddleName = textbox_lastname.Text
@@ -190,6 +190,7 @@ namespace AdminPartShop.Pages
                         var updatedUserJson = await response.Content.ReadAsStringAsync();
                         User updatedUser = JsonConvert.DeserializeObject<User>(updatedUserJson);
 
+                        text_email.Content = updatedUser.Email;
                         text_surname.Content = updatedUser.Surname;
                         text_name.Content = updatedUser.Name;
                         text_lastname.Content = updatedUser.Middle_Name;
@@ -298,5 +299,40 @@ namespace AdminPartShop.Pages
             btn_cancel_redact.Visibility = Visibility.Hidden;
             btn_redact.Visibility = Visibility.Visible;
         }
+
+        private async void Hyperlink_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы уверены, что хотите удалить ваш аккаунт?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string url = $"http://localhost:5140/api/User/{currentUserId}";
+                        HttpResponseMessage response = await client.DeleteAsync(url);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Ваш аккаунт был успешно удален!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            Window.GetWindow(this)?.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Не удалось удалить аккаунт. Ошибка: {response.ReasonPhrase}.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
     }
 }

@@ -12,11 +12,34 @@ namespace AdminPartShop.Models
     {
         private const string FilePath = "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\users.json";
 
+        private static bool IsJsonValid(string json)
+        {
+            try
+            {
+                var users = JsonConvert.DeserializeObject<List<User>>(json);
+                return users != null;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
         public static List<User> GetUsers()
         {
             string json = File.ReadAllText(FilePath);
-            var users = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
-            return users;
+
+            if (IsJsonValid(json))
+            {
+                var users = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
+                return users;
+            }
+            else
+            {
+                SaveUsers(new List<User>());
+                return new List<User>();
+            }
         }
 
         public static void SaveUsers(List<User> users)

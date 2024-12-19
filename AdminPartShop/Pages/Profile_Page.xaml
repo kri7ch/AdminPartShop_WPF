@@ -94,5 +94,11 @@
         
         <Label x:Name="text_enable" Content="Включена" Foreground="DimGray" FontSize="32" 
                FontWeight="Medium" FontFamily="Bahnschrift Light" Margin="1030,275,360,582" Visibility="Hidden"/>
+        
+        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="32" Margin="1256,0,0,37" FontFamily="Bahnschrift Light">
+            <Hyperlink Click="Hyperlink_Click_Delete" TextDecorations="None" Foreground="Red" FontWeight="Bold">
+                <Run Text="Удалить аккаунт"/>
+            </Hyperlink>
+        </TextBlock>
     </Grid>
 </Page>

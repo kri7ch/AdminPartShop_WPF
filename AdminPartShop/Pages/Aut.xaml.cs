@@ -37,19 +37,26 @@ namespace AdminPartShop.Pages
         public Aut()
         {
             InitializeComponent();
-            LoadUsers();
+            LoadAllUsers();
         }
-        private void LoadUsers()
+        private async void LoadAllUsers()
         {
-            if (File.Exists(path))
+            HttpClient client = new HttpClient();
+            string url = "http://localhost:5140/api/User/UserAll";
+
+            try
             {
-                string json = File.ReadAllText(path);
-                var userList = JsonConvert.DeserializeObject<List<User>>(json);
-                users = new ObservableCollection<User>(userList);
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var userJson = await response.Content.ReadAsStringAsync();
+                    var userList = JsonConvert.DeserializeObject<List<User>>(userJson);
+                    users = new ObservableCollection<User>(userList);
+                }
             }
-            else
+            catch (HttpRequestException ex)
             {
-                users = new ObservableCollection<User>();
+                MessageBox.Show($"Ошибка HTTP: {ex.Message}");
             }
         }
 
@@ -161,7 +168,9 @@ namespace AdminPartShop.Pages
 
         private async void Checking_the_data()
         {
-            LoadUsers();
+            LoadAllUsers();
+
+            User user = null;
 
             string email = textbox_email.Text;
 
@@ -172,7 +181,14 @@ namespace AdminPartShop.Pages
                 return;
             }
 
-            User user = users.FirstOrDefault(u => u.Email == email);
+            try
+            {
+                user = users.FirstOrDefault(u => u.Email == email);
+            }
+            catch(Exception)
+            {
+                user = null;
+            }
 
             if (user == null)
             {

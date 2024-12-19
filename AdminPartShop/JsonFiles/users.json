@@ -2,7 +2,7 @@
   {
     "Id": 1,
     "Surname": "Рахмаев",
-    "Name": "Данил",
+    "Name": "Данилка",
     "Middle_Name": "Денисович",
     "BirthDay": "0001-01-01",
     "Email": "qwe@qwe.qwe",
@@ -194,17 +194,6 @@
     "BirthDay": "2006-12-7",
     "Email": "qwRVWe@qwe.qwe",
     "Password": "Qwe123",
-    "LockoutEnd": null,
-    "TwoFactor_Authentication": false
-  },
-  {
-    "Id": 19,
-    "Surname": "Rakhmaev",
-    "Name": "Danil",
-    "Middle_Name": "Den",
-    "BirthDay": "2006-12-6",
-    "Email": "qwe123@qwe.qwe",
-    "Password": "Danil123",
     "LockoutEnd": null,
     "TwoFactor_Authentication": false
   }

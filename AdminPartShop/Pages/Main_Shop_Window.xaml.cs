@@ -74,14 +74,13 @@ namespace AdminPartShop.Pages
                 }
             }
         }
-
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = searchTextBox.Text.ToLower();
+
             if (!string.IsNullOrEmpty(searchText))
             {
                 SearchProducts(searchText);
-                tovar_ne_naiden.Visibility = Visibility.Visible;
             }
             else
             {
@@ -89,7 +88,6 @@ namespace AdminPartShop.Pages
                 tovar_ne_naiden.Visibility = Visibility.Hidden;
             }
         }
-
 
         private async void SearchProducts(string searchText)
         {
@@ -109,11 +107,12 @@ namespace AdminPartShop.Pages
                     else
                     {
                         MessageBox.Show("Ошибка при выполнении поиска: " + response.ReasonPhrase);
+                        tovar_ne_naiden.Visibility = Visibility.Visible;
                     }
                 }
                 catch (HttpRequestException ex)
                 {
-                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                    MessageBox.Show($"Ошибка: {ex.Message}");
                 }
             }
         }
@@ -121,12 +120,21 @@ namespace AdminPartShop.Pages
         private void UpdateProductList(List<Products> products)
         {
             list_view_products.Items.Clear();
-            foreach (var product in products)
+
+            if (products != null && products.Count > 0)
             {
-                var productControl = new Product_card();
-                productControl.SetProductData(product);
-                productControl.EditButtonClicked += ProductControl_EditButtonClicked;
-                list_view_products.Items.Add(productControl);
+                foreach (var product in products)
+                {
+                    var productControl = new Product_card();
+                    productControl.SetProductData(product);
+                    productControl.EditButtonClicked += ProductControl_EditButtonClicked;
+                    list_view_products.Items.Add(productControl);
+                }
+                tovar_ne_naiden.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                tovar_ne_naiden.Visibility = Visibility.Visible;
             }
         }
 
@@ -152,7 +160,7 @@ namespace AdminPartShop.Pages
                 }
                 catch (HttpRequestException ex)
                 {
-                    MessageBox.Show($"HTTP Request Error: {ex.Message}");
+                    MessageBox.Show($"Ошибка: {ex.Message}");
                 }
             }
         }

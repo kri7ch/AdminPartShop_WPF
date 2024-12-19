@@ -14,6 +14,7 @@ namespace AdminPartShop.Models
         public int Count_Product { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public string ImageBase64 { get; set; }
         public int CategoryID { get; set; }
         public int Rating { get; set; }
     }

@@ -90,6 +90,7 @@ namespace AdminPartShop.Controllers
             product.Count_Product = updatedProduct.Count_Product;
             product.Description = updatedProduct.Description;
             product.ImagePath = updatedProduct.ImagePath;
+            product.ImageBase64 = updatedProduct.ImageBase64;
             product.CategoryID = updatedProduct.CategoryID;
             product.Rating = updatedProduct.Rating;
 

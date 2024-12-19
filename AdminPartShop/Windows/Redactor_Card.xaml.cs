@@ -15,6 +15,8 @@ using Microsoft.Win32;
 using System.IO;
 using Newtonsoft.Json;
 using AdminPartShop.Models;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace AdminPartShop.Windows
 {
@@ -35,6 +37,8 @@ namespace AdminPartShop.Windows
 
         private bool Existing = false;
 
+        private int productId;
+
         private bool Del = false;
         public string path = "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\products.json";
         public Redactor_Card(Products product = null)
@@ -43,10 +47,10 @@ namespace AdminPartShop.Windows
             ProductImage.MouseLeftButtonDown += ProductImage_MouseLeftButtonDown;
             btn_redact.Click += BtnRedact_Click;
 
-
             if (product != null)
             {
                 IsEditing = true;
+                productId = product.Id;
                 textbox_name.Text = product.Name_Product;
                 textbox_price.Text = product.Price;
                 textbox_count.Text = product.Count_Product.ToString();
@@ -56,6 +60,7 @@ namespace AdminPartShop.Windows
                 ProductImage.Source = new BitmapImage(new Uri(ImagePath));
             }
         }
+
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             EditButtonClicked?.Invoke(this, e);
@@ -63,53 +68,86 @@ namespace AdminPartShop.Windows
 
         private void ProductImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            try
             {
-                Filter = "Image Files (*.png)|*.png",
-                Title = "Выберите изображение товара"
-            };
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "Image Files (*.png)|*.png",
+                    Title = "Выберите изображение товара"
+                };
 
-            if (openFileDialog.ShowDialog() == true)
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ProductImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    ImagePath = openFileDialog.FileName;
+                }
+            }
+            catch(Exception) 
             {
-                ProductImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                ImagePath = openFileDialog.FileName;
+                MessageBox.Show("Выберите фотографию с верным форматом!");
+                return;
             }
         }
 
-        private void BtnRedact_Click(object sender, RoutedEventArgs e)
+        private async Task AddProduct(Products product)
         {
-            List<TextBox> textBoxes = new List<TextBox>
+            product.ImageBase64 = ConvertImageToBase64(product.ImagePath);
+            using (HttpClient client = new HttpClient())
             {
-                textbox_name,
-                textbox_description,
-                textbox_count,
-                textbox_price,
-                textbox_category_id
-            };
+                string url = "http://localhost:5140/api/Product/Add";
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var json = JsonConvert.SerializeObject(product);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            foreach (TextBox textBox in textBoxes)
-            {
-                if (textBox.Text == "")
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Заполнены не все поля!", "Пустые поля", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    MessageBox.Show("Товар успешно добавлен!");
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка: {response.ReasonPhrase}");
                 }
             }
+        }
 
-            if (!IsValidProductName(textbox_name.Text))
+        private async Task UpdateProduct(int id, Products product)
+        {
+            product.ImageBase64 = ConvertImageToBase64(product.ImagePath);
+            using (HttpClient client = new HttpClient())
             {
-                MessageBox.Show("Название должно содержать только буквы.", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                string url = $"http://localhost:5140/api/Product/Update/{id}";
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var json = JsonConvert.SerializeObject(product);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            if (!IsValidCategory(textbox_category_id.Text))
+                HttpResponseMessage response = await client.PutAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Товар успешно обновлён!");
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка: {response.ReasonPhrase}");
+                }
+            }
+        }
+
+        private string ConvertImageToBase64(string imagePath)
+        {
+            if (File.Exists(imagePath))
             {
-                MessageBox.Show("Категория должна быть 1 или 2.", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                byte[] imageBytes = File.ReadAllBytes(imagePath);
+                return Convert.ToBase64String(imageBytes);
             }
+            return null;
+        }
 
+        private async void BtnRedact_Click(object sender, RoutedEventArgs e)
+        {
             var product = new Products
             {
+                Id = IsEditing ? productId : 0,
                 Name_Product = textbox_name.Text,
                 Price = textbox_price.Text,
                 Count_Product = int.Parse(textbox_count.Text),
@@ -118,25 +156,26 @@ namespace AdminPartShop.Windows
                 CategoryID = int.Parse(textbox_category_id.Text)
             };
 
-            UpdateProduct(product);
-
-            if (Existing)
+            try
             {
-                return;
-            }
+                if (IsEditing)
+                {
+                    await UpdateProduct(product.Id, product);
+                }
+                else
+                {
+                    await AddProduct(product);
+                }
 
-            if (IsEditing)
-            {
-                UpdateProductInFile(product);
+                OnProductCreated?.Invoke();
+                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                SaveProductToFile(product);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            OnProductCreated?.Invoke();
-            this.Close();
         }
+
 
         private bool IsValidProductName(string name)
         {

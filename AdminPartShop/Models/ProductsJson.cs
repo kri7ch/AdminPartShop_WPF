@@ -12,6 +12,19 @@ namespace AdminPartShop.Models
     {
         private const string FilePath = "C:\\Users\\rakhm\\source\\repos\\AdminPartShop\\AdminPartShop\\JsonFiles\\products.json";
 
+        private static bool IsJsonValid(string json)
+        {
+            try
+            {
+                var products = JsonConvert.DeserializeObject<List<Products>>(json);
+                return products != null;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static List<Products> GetProductsFromFile()
         {
             if (!File.Exists(FilePath))
@@ -20,17 +33,26 @@ namespace AdminPartShop.Models
             }
 
             var json = File.ReadAllText(FilePath);
-            var collection = JsonConvert.DeserializeObject<List<Products>>(json);
 
-            foreach (var product in collection)
+            if (IsJsonValid(json))
             {
-                var product2 = product as Products;
-                if (!File.Exists(product2.ImagePath))
+                var collection = JsonConvert.DeserializeObject<List<Products>>(json) ?? new List<Products>();
+
+                foreach (var product in collection)
                 {
-                    product2.ImagePath = "C:\\Users\\rakhm\\Downloads\\no-image.png";
+                    if (!File.Exists(product.ImagePath))
+                    {
+                        product.ImagePath = "C:\\Users\\rakhm\\Downloads\\no-image.png";
+                    }
                 }
+
+                return collection;
             }
-            return collection;
+            else
+            {
+                SaveProductsToFile(new List<Products>());
+                return new List<Products>();
+            }
         }
 
         public static void SaveProductsToFile(List<Products> products)
